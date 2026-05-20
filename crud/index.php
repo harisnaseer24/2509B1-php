@@ -15,6 +15,8 @@
       <th scope="col">Price</th>
       <th scope="col">Stock</th>
       <th scope="col">Pta Status</th>
+      <th scope="col">Actions</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -36,6 +38,12 @@
       <td>{$row["price"]}</td>
       <td>{$row["stock"]}</td>
       <td>{$row["ptaStatus"]}</td>
+      <td>
+            <a href='./edit.php?id={$row["id"]}' class='btn btn-sm btn-primary'>Edit</a>
+            <a href='./delete.php?id={$row["id"]}' class='btn btn-sm btn-danger'>Delete</a>
+
+      </td>
+
     </tr>";
 
                   }
