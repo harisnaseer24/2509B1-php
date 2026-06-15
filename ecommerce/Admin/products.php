@@ -65,9 +65,9 @@ while($row = mysqli_fetch_assoc($getProductsResult)){
                             
                             <td>
                             
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
+                                <a href="./productDetails.php?p_id=<?= $product_id  ?>" class="btn btn-outline-primary">View</a>
+                                <a href="./editproduct.php?p_id=<?= $product_id  ?>" class="btn btn-outline-primary">Edit</a>
+                                <a href="./deleteproduct.php?p_id=<?= $product_id  ?>" class="btn btn-outline-primary">Delete</a>
                             
                                 </td>
                             </tr>
