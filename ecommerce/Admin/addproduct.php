@@ -6,8 +6,6 @@
 $getCategoriesQuery = "SELECT * FROM `categories`";
 $getCategoryResult = mysqli_query($conn,$getCategoriesQuery);
 
-
-
  ?>
      <!-- partial -->
       <div class="main-panel">
