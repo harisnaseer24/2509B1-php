@@ -10,16 +10,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Melody Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="./vendors/iconfonts/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="./vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="./vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="../Admin/vendors/iconfonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="../Admin/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../Admin/vendors/css/vendor.bundle.addons.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../Admin/css/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="./images/favicon.png" />
+  <link rel="shortcut icon" href="../Admin/images/favicon.png" />
 </head>
 
 <body>
@@ -30,12 +30,22 @@
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
-                <img src="./images/logo.svg" alt="logo">
+                <img src="../Admin/images/logo.svg" alt="logo">
               </div>
-              <h4>Welcome Back</h4>
-              <h6 class="font-weight-light">Happy to see you again!</h6>
+              <h4>New here?</h4>
+              <h6 class="font-weight-light">Join us today! It takes only few steps</h6>
               <form class="pt-3" method="post">
-               
+                <div class="form-group">
+                  <label>Username</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent">
+                      <span class="input-group-text bg-transparent border-right-0">
+                        <i class="fa fa-user text-primary"></i>
+                      </span>
+                    </div>
+                    <input type="text"name="username" required class="form-control form-control-lg border-left-0" placeholder="Username">
+                  </div>
+                </div>
                 <div class="form-group">
                   <label>Email</label>
                   <div class="input-group">
@@ -68,10 +78,10 @@
                   </div>
                 </div>
                 <div class="mt-3">
-                  <input type="submit" name ="signin" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="SIGN IN" >
+                  <input type="submit" name ="signup" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="SIGN UP" >
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  New here? <a href="signup.php" class="text-primary">Register now</a>
+                  Already have an account? <a href="login.php" class="text-primary">Login</a>
                 </div>
               </form>
             </div>
@@ -87,15 +97,15 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="./vendors/js/vendor.bundle.base.js"></script>
-  <script src="./vendors/js/vendor.bundle.addons.js"></script>
+  <script src="../Admin/vendors/js/vendor.bundle.base.js"></script>
+  <script src="../Admin/vendors/js/vendor.bundle.addons.js"></script>
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="./js/off-canvas.js"></script>
-  <script src="./js/hoverable-collapse.js"></script>
-  <script src="./js/misc.js"></script>
-  <script src="./js/settings.js"></script>
-  <script src="./js/todolist.js"></script>
+  <script src="../Admin/js/off-canvas.js"></script>
+  <script src="../Admin/js/hoverable-collapse.js"></script>
+  <script src="../Admin/js/misc.js"></script>
+  <script src="../Admin/js/settings.js"></script>
+  <script src="../Admin/js/todolist.js"></script>
   <!-- endinject -->
 </body>
 
@@ -105,47 +115,44 @@
 
 <?php 
 
-if(isset($_POST['signin'])){
+if(isset($_POST['signup'])){
+
 @require_once('../config/connection.php');
 
-// preventing our system from  "sql injection"
+$username= htmlspecialchars($_POST['username']);;
 $email= htmlspecialchars($_POST['email']);
 $password= htmlspecialchars($_POST['password']);
+
+$hashpassword= password_hash($password, PASSWORD_BCRYPT);
+
 
 // checking whether user is already registered or not
 $checkUser="SELECT * from users WHERE email = '$email'";
 $checkUserResult= mysqli_query ($conn, $checkUser);
+if(mysqli_num_rows($checkUserResult) > 0){
 
 
-if(mysqli_num_rows($checkUserResult) <= 0){
+  echo "<script>alert('User Already Registered. Please login')
+  window.location.href='./login.php'  ;</script>";
 
-
-  echo "<script>alert('User not Registered. Please Signup first..!')
-  window.location.href='./signup.php'  ;</script>";
 
 }else{
+  $addUser= "INSERT INTO `users`( `username`, `email`, `password`) VALUES ('$username','$email','$hashpassword')";
+$result = mysqli_query($conn, $addUser);
+if ($result) {
+  echo "<script>alert('User Registered Successfully')
+  window.location.href='./login.php'
 
-$row = mysqli_fetch_assoc($checkUserResult);
-$verifyPassword = password_verify($password, $row["password"]);  // true/false
-
-if ($verifyPassword == true) {
-  echo "<script>alert('Login Success')
-  window.location.href='./index.php'
   ;</script>";
+
 } else {
-  echo "<script>alert('Invalid Credentials..!')
+
+  echo "<script>alert('Failed to register user right now..!')
   ;</script>";
 
 }
+
 }
-
-
-
-
-
-
-
-
 
 }
 
