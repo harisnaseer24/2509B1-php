@@ -170,4 +170,4 @@ if($row["role"] == "admin" ) {
 
 ?>
 
-<!-- SESSION -->
+<!-- SESSIONs in php -->
