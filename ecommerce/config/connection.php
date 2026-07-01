@@ -3,7 +3,7 @@
 
 $server="localhost";
 $username="root";
-$password="";
+$password="YourNewPassword";
 $dbname="2509b1_ecommerce";
 
 

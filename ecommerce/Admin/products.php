@@ -1,5 +1,12 @@
 
 <?php 
+
+session_start();
+
+if(!isset($_SESSION["role"]) || $_SESSION["role"] !="admin"){
+  header("Location: ../user/login.php");
+}
+
 @include_once('./components/header.php');
 @require_once('../config/connection.php');
 

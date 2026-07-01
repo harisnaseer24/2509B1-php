@@ -132,7 +132,6 @@ $verifyPassword = password_verify($password, $row["password"]);  // true/false
 
 if ($verifyPassword == true) {
 
-
 $_SESSION["email"] =$email;
 $_SESSION["username"] =$row["username"];
 $_SESSION["role"] =$row["role"];
@@ -153,18 +152,8 @@ if($row["role"] == "admin" ) {
 } else {
   echo "<script>alert('Invalid Credentials..!')
   ;</script>";
-
 }
 }
-
-
-
-
-
-
-
-
-
 }
 
 
