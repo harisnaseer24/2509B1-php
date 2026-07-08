@@ -103,15 +103,28 @@ while($row=mysqli_fetch_assoc($getProductsResult)){
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="../Admin/uploads/<?= $row["image"] ?>" alt="">
+										<img src="../Admin/uploads/<?= $row["image"] ?>" alt="" height="250" >
 										<div class="product-label">
 											<span class="sale">-30%</span>
-											<span class="new">NEW</span>
+											<span class="new">
+
+											<?php 
+											
+											if($row["stock"] > 0){
+												echo "In Stock";
+											}
+											else{
+												echo "Out of Stock";
+											}
+											
+											?>
+
+											</span>
 										</div>
 									</div>
 									<div class="product-body">
 										<p class="product-category"><?= $row["cat_name"] ?></p>
-										<h3 class="product-name"><a href="#"><?= $title ?></a></h3>
+										<h3 class="product-name"><a href="./productDetails.php?p_id=<?= $p_id ?>"><?= $title ?></a></h3>
 										<h4 class="product-price">Rs. <?= $row["price"] ?> <del class="product-old-price">
 										Rs.	<?= $oldprice ?>
 										</del></h4>
