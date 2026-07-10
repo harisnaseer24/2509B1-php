@@ -25,6 +25,16 @@ $productDetails = mysqli_fetch_assoc($getProductQueryResult);
                  <h1><?= $productDetails['title'] ?></h1>
                         <h3>Rs. <?= $productDetails['price'] ?></h3>
                         <p><?= $productDetails['description'] ?></p>
+                     
+                        <form action="./addtocart.php" method="post">
+
+
+                        <input type="hidden" name="p_id" value="<?= $productDetails['p_id'] ?>">
+                        <input type="hidden" name="p_id" value="<?= $productDetails['price'] ?>">
+                        <input type="number" class="" placeholder="Enter qty" name="qty" value="" min="1" max="<?= $productDetails['stock'] ?>">
+                        <input type="submit" class="btn btn-danger" name="addtocart" value="Add to cart">
+                     
+                        </form>
 
             </div>
         </div>

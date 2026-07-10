@@ -142,7 +142,18 @@ while($row=mysqli_fetch_assoc($getProductsResult)){
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+
+ <form action="./addtocart.php" method="post">
+
+
+                        <input type="hidden" name="p_id" value="<?= $row['p_id'] ?>">
+                        <input type="hidden" name="p_id" value="<?= $row['price'] ?>">
+                        <input type="hidden" class="" placeholder="Enter qty" name="qty" value="1">
+                        <input type="submit" class="add-to-cart-btn" name="addtocart" value="Add to cart"><i class="fa fa-cart"></i>
+                     
+                        </form>
+
+										
 									</div>
 								</div>
 							</div>
