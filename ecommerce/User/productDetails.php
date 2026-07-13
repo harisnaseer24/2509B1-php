@@ -30,7 +30,7 @@ $productDetails = mysqli_fetch_assoc($getProductQueryResult);
 
 
                         <input type="hidden" name="p_id" value="<?= $productDetails['p_id'] ?>">
-                        <input type="hidden" name="p_id" value="<?= $productDetails['price'] ?>">
+                        <input type="hidden" name="price" value="<?= $productDetails['price'] ?>">
                         <input type="number" class="" placeholder="Enter qty" name="qty" value="" min="1" max="<?= $productDetails['stock'] ?>">
                         <input type="submit" class="btn btn-danger" name="addtocart" value="Add to cart">
                      
